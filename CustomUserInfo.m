@@ -15,12 +15,6 @@
 
 - (BOOL) validateUserAccount: username : accountPassword {
     
-    if(!username || [username length] == 0) username = [self getUserId];
-    
-    
-    if(!accountPassword || [accountPassword length] == 0)  accountPassword = [self getUserPassword];
-    
-    
     if(!username || [username length] == 0 || !accountPassword || [accountPassword length] == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"",nil)
                                                         message:NSLocalizedString(@"Mobile number or Password can't be empty.",nil)
@@ -180,40 +174,6 @@
    
     return flag;
 }
-
-- (BOOL) hasUserId {
-    NSString *userId = [self getUserId];
-    if ([userId isEqualToString:@""] || [userId isEqualToString:nil]) {
-        return false;
-    }
-    else return true;
-}
-
-- (BOOL) hasUserPassword {
-    NSString *password = [self getUserPassword];
-    if ([password isEqualToString:@""] || [password isEqualToString:nil]) {
-        return false;
-    }
-    else return true;
-}
-
-- (NSString *) getUserId {
-    NSDictionary* ns = [LinphoneCoreSettingsStore getDict];
-    NSString *username = [ns objectForKey:@"username_preference"];
-    
-    if ([username hasPrefix:@"+"] && [username length] > 1) {
-        username = [username substringFromIndex:1];
-    }
-    return username;
-}
-
-
-- (NSString *) getUserPassword {
-    NSDictionary* ns = [LinphoneCoreSettingsStore getDict];
-    NSString *password = [ns objectForKey:@"password_preference"];
-    return password;
-}
-
 
 - (NSString *) getRandomString {
     NSString * randString = [MD5Library randomStringWithLength:32];
