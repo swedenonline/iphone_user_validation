@@ -72,7 +72,7 @@
     NSString* stringURL                 = [NSString stringWithFormat:domainName,username,challenge];
     NSURL* url                          = [NSURL URLWithString:stringURL];
     
-    if(linphone_core_is_network_reachable([LinphoneManager getLc])) {
+    if(_is_network_reachable()) {
         
         
         NSURLRequest *request           = [NSURLRequest requestWithURL:url
